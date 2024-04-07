@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.exercise.reposcanms.constants.apiConstants.API;
-import static com.exercise.reposcanms.constants.apiConstants.HEALTH_CHECK;
+import static com.exercise.reposcanms.constants.ApiConstants.API;
+import static com.exercise.reposcanms.constants.ApiConstants.HEALTH_CHECK;
 
 @RestController
 @RequestMapping(API)
