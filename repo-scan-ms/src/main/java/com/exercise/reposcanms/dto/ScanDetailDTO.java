@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,8 +26,11 @@ public class ScanDetailDTO implements Serializable {
     private ScanStatus scanStatus;
     private Integer scanIssues;
     private Boolean scanValid;
+    private LocalDateTime submissionTime;
 
-    public ScanDetailDTO(Long workspaceId, String workspaceName, Long repoId, String repoName, Long branchId, String branchName, Long scanId, ScanType scanType, ScanStatus scanStatus, Integer scanIssues, Boolean scanValid) {
+    public ScanDetailDTO(Long workspaceId, String workspaceName, Long repoId, String repoName, Long branchId,
+                         String branchName, Long scanId, ScanType scanType, ScanStatus scanStatus,
+                         Integer scanIssues, Boolean scanValid, LocalDateTime submissionTime) {
         this.workspaceId = workspaceId;
         this.workspaceName = workspaceName;
         this.repoId = repoId;
@@ -38,6 +42,7 @@ public class ScanDetailDTO implements Serializable {
         this.scanStatus = scanStatus;
         this.scanIssues = scanIssues;
         this.scanValid = scanValid;
+        this.submissionTime = submissionTime;
     }
 
 }

@@ -10,6 +10,7 @@ import com.exercise.reposcanms.model.Branch;
 import com.exercise.reposcanms.model.enums.ScanStatus;
 import com.exercise.reposcanms.repositories.BranchRepo;
 import com.exercise.reposcanms.repositories.ScanRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Transactional
 public class ScanServiceImpl implements ScanService {
 
     ScanRepo scanRepo;
@@ -30,8 +32,6 @@ public class ScanServiceImpl implements ScanService {
         this.delegateScanService = delegateScanService;
         this.branchRepo = branchRepo;
     }
-
-
 
     @Override
     public List<ScanDetailDTO> getDetailsOnAllScansByUserId(Long userId) {
@@ -54,7 +54,6 @@ public class ScanServiceImpl implements ScanService {
         if (!branch.getRepo().getWorkspace().getUser().getId().equals(scanRequestDTO.getUserId())) {
             throw new NoPermissionException("user does not have access to this branch");
         }
-
 
         Scan newScan = new Scan();
         newScan.setBranch(branch);

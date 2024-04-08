@@ -13,7 +13,7 @@ import java.util.List;
 public interface ScanRepo extends CrudRepository<Scan, Long> {
 
     @Query("SELECT new com.exercise.reposcanms.dto.ScanDetailDTO(" +
-            "w.id, w.name, r.id, r.name, b.id, b.name, s.id, s.type, s.status, s.issues, s.valid) " +
+            "w.id, w.name, r.id, r.name, b.id, b.name, s.id, s.type, s.status, s.issues, s.valid, s.submissionTime) " +
             "FROM User u " +
             "JOIN u.workspaces w " +
             "JOIN w.repos r " +
