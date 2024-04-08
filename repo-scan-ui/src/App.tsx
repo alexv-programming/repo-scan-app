@@ -9,7 +9,7 @@ import ScansTableContainer from './components/ScansTableContainer'
 function App() {
   return (
     <div className="App" data-testid="app-page">
-      <h1>New Scan Submission</h1>
+      <h1>Overview</h1>
       <OverviewContainer userId={1} />
       <h1>New Scan Submission</h1>
       <NewScanForm />

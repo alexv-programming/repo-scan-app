@@ -17,6 +17,7 @@ const columns: GridColDef[] = [
   { field: 'workspaceName', headerName: 'Workspace', width: 150 },
   { field: 'repoName', headerName: 'Repository', width: 150 },
   { field: 'branchName', headerName: 'Branch', width: 150 },
+  { field: 'submissionTime', headerName: 'Submission Time', width: 150 },
 ]
 
 function DataTable({ data }: { data: ScanData[] }) {

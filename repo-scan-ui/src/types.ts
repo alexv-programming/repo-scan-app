@@ -7,13 +7,20 @@ export interface ScanData {
   branchId: number
   branchName: string
   scanType: 'SCA' | 'SAST' | 'RENOVATE'
-  scanStatus: string
+  scanStatus: 'PENDING' | 'COMPLETED'
   scanIssues: number
   scanValid: boolean
+  submissionTime: Date
 }
 
 export interface OverviewData {
   scanType: string
   scansCount: number
   issues: number
+}
+
+export interface NewScanData {
+  userId: number
+  branchId: number
+  scanType: 'SCA' | 'SAST' | 'RENOVATE'
 }

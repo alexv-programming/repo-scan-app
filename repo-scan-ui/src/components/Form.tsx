@@ -1,11 +1,13 @@
+import styled from '@emotion/styled'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-interface IFormInput {
-  type: 'SCA' | 'SAST' | 'RENOVATE'
-  branch: string
-  repo: string
-}
+import { fetchNewScan } from '../api-services/repo-scan-ms'
+import { NewScanData } from '../types'
+
+const StyledP = styled('p')({
+  color: 'red',
+})
 
 const NewScanForm: React.FC = () => {
   const {
@@ -13,38 +15,51 @@ const NewScanForm: React.FC = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<IFormInput>()
+  } = useForm<NewScanData>()
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data)
-    // Here, you would typically make an API call to submit the data
-    reset() // Optional: Reset the form after submission
+  const onSubmit: SubmitHandler<NewScanData> = (data) => {
+    fetchNewScan(data)
+      .then((res) => {
+        console.log(res.status)
+        if (!res.status) {
+          throw new Error('Network response was not ok')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        alert(`Error: ${err.message}`)
+      })
+
+    reset()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
+        <label>User</label>
+        <select {...register('userId', { required: true })}>
+          <option value={1}>User 1</option>
+          <option value={2}>User 2</option>
+        </select>
+        {errors.userId && <StyledP>user is required.</StyledP>}
+      </div>
+
+      <div>
         <label>Type</label>
         <select
-          {...register('type', { required: true })}
+          {...register('scanType', { required: true })}
           placeholder="SCA SAST RENOVATE">
           <option value="SCA">SCA</option>
           <option value="SAST">SAST</option>
           <option value="RENOVATE">RENOVATE</option>
         </select>
-        {errors.type && <p>Type is required.</p>}
+        {errors.scanType && <StyledP>Type is required.</StyledP>}
       </div>
 
       <div>
-        <label>Branch</label>
-        <input {...register('branch', { required: true })} />
-        {errors.branch && <p>Branch is required.</p>}
-      </div>
-
-      <div>
-        <label>Repo</label>
-        <input {...register('repo', { required: true })} />
-        {errors.repo && <p>Repo is required.</p>}
+        <label>Branch ID</label>
+        <input {...register('branchId', { required: true })} />
+        {errors.branchId && <StyledP>Branch is required.</StyledP>}
       </div>
 
       <input type="submit" />

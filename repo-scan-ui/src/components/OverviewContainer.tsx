@@ -9,9 +9,22 @@ const OverviewContainer = ({ userId }: { userId: number }) => {
 
   useEffect(() => {
     fetchOverview(userId)
-      .then((res) => setOverviewData(res.data))
-      .catch((err) => console.log(err))
+      .then((res) => {
+        console.log(res.status)
+        if (!res.status) {
+          throw new Error('Network response was not ok')
+        }
+        setOverviewData(res.data)
+      })
+
+      .catch((err) => {
+        console.error('Fetch error:', err)
+      }) //TODO: handle error
   }, [userId])
+
+  if (overviewData.length === 0) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
