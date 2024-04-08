@@ -7,18 +7,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Data
 @NoArgsConstructor
-public class ScanDetailDTO {
+public class ScanDetailDTO implements Serializable {
+    private Long id;
     private Long workspaceId;
     private String workspaceName;
     private Long repoId;
     private String repoName;
     private Long branchId;
     private String branchName;
-    private Long scanId;
     private ScanType scanType;
     private ScanStatus scanStatus;
     private Integer scanIssues;
@@ -31,7 +33,7 @@ public class ScanDetailDTO {
         this.repoName = repoName;
         this.branchId = branchId;
         this.branchName = branchName;
-        this.scanId = scanId;
+        this.id = scanId;
         this.scanType = scanType;
         this.scanStatus = scanStatus;
         this.scanIssues = scanIssues;

@@ -1,6 +1,7 @@
 package com.exercise.reposcanms.repositories;
 
 import com.exercise.reposcanms.dto.ScanDetailDTO;
+import com.exercise.reposcanms.dto.ScansSummaryDTO;
 import com.exercise.reposcanms.model.Scan;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,4 +21,10 @@ public interface ScanRepo extends CrudRepository<Scan, Long> {
             "JOIN b.scans s " +
             "WHERE u.id = :userId")
     List<ScanDetailDTO> findAllDataOnScanByUserId(Long userId);
+
+    @Query("SELECT new com.exercise.reposcanms.dto.ScansSummaryDTO(s.type, COUNT(s), SUM(s.issues)) " +
+            "FROM Scan s JOIN s.branch b JOIN b.repo r JOIN r.workspace w JOIN w.user u " +
+            "WHERE u.id = :userId " +
+            "GROUP BY s.type")
+    List<ScansSummaryDTO> getOverviewByUserId(Long userId);
 }

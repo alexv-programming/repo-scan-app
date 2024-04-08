@@ -2,6 +2,7 @@ package com.exercise.reposcanms.controllers;
 
 import com.exercise.reposcanms.dto.ScanDetailDTO;
 import com.exercise.reposcanms.dto.ScanRequest;
+import com.exercise.reposcanms.dto.ScansSummaryDTO;
 import com.exercise.reposcanms.services.ScanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ public class ScanController {
     @GetMapping("/user/{userId}")
     public List<ScanDetailDTO> getAllScans(@PathVariable Long userId) {
         return scanService.getDetailsOnAllScansByUserId(userId);
+    }
+
+    @GetMapping("/user/{userId}/overview")
+    public List<ScansSummaryDTO> getOverviewByUserId(@PathVariable Long userId) {
+        return scanService.getOverviewByUserId(userId);
     }
 
     @PostMapping
