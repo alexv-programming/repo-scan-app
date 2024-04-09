@@ -25,9 +25,9 @@ public class DelegateScanMockService {
         int issues = random.nextInt(10);
 
         long sleepTime = switch (scan.getType()) {
-            case SCA -> 12000; // 2 minutes
-            case SAST -> 6000; // 1 minute
-            case RENOVATE -> 3000; // 30 seconds
+            case SCA -> 120000; // 2 minutes
+            case SAST -> 60000; // 1 minute
+            case RENOVATE -> 30000; // 30 seconds
         };
 
         // Simulate scan time
