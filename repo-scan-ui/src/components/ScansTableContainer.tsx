@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 
+import { APIContext } from '../api-services/apiContext'
 import { fetchScans } from '../api-services/repo-scan-ms'
-import { ScanData } from '../types'
+import { APIContextType } from '../types'
 import ScansTableSearchable from './ScansTableSearchable'
 
 const ScansTableContainer = ({ userId }: { userId: number }) => {
-  const [scans, setScans] = useState<ScanData[]>([])
+  const { isLoading, setScans, setIsLoading } = useContext(
+    APIContext,
+  ) as APIContextType
 
   useEffect(() => {
+    setIsLoading(true)
     fetchScans(userId)
       .then((res) => setScans(res.data))
       .catch((err) => {
         console.error('Fetch error:', err)
-      }) //TODO: handle error to
+      })
+      .finally(() => setIsLoading(false))
   }, [userId])
 
-  if (scans.length === 0) {
+  if (isLoading) {
     return <div>Loading...</div>
   }
 
-  return <ScansTableSearchable data={scans} />
+  return <ScansTableSearchable />
 }
 
 export default ScansTableContainer

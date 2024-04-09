@@ -1,15 +1,17 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useContext } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { APIContext } from '../api-services/apiContext'
 import { fetchNewScan } from '../api-services/repo-scan-ms'
-import { NewScanData } from '../types'
+import { APIContextType, NewScanData } from '../types'
 
 const StyledP = styled('p')({
   color: 'red',
 })
 
 const NewScanForm: React.FC = () => {
+  const { updateScans } = useContext(APIContext) as APIContextType
   const {
     register,
     handleSubmit,
@@ -20,10 +22,8 @@ const NewScanForm: React.FC = () => {
   const onSubmit: SubmitHandler<NewScanData> = (data) => {
     fetchNewScan(data)
       .then((res) => {
-        console.log(res.status)
-        if (!res.status) {
-          throw new Error('Network response was not ok')
-        }
+        updateScans(res.data)
+        reset()
       })
       .catch((err) => {
         console.log(err)

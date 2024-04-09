@@ -24,3 +24,11 @@ export interface NewScanData {
   branchId: number
   scanType: 'SCA' | 'SAST' | 'RENOVATE'
 }
+
+export interface APIContextType {
+  scans: ScanData[]
+  isLoading: boolean
+  setScans: (scans: ScanData[]) => void
+  setIsLoading: (isLoading: boolean) => void
+  updateScans: (scans: ScanData) => void
+}

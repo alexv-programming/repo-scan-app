@@ -1,7 +1,8 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import * as React from 'react'
 
-import { ScanData } from '../types'
+import { APIContext } from '../api-services/apiContext'
+import { APIContextType } from '../types'
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Scan ID', width: 90 },
@@ -20,11 +21,12 @@ const columns: GridColDef[] = [
   { field: 'submissionTime', headerName: 'Submission Time', width: 150 },
 ]
 
-function DataTable({ data }: { data: ScanData[] }) {
+function DataTable() {
+  const { scans } = React.useContext(APIContext) as APIContextType
   return (
     <div style={{ height: 'fit-content', width: '100%' }}>
       <DataGrid
-        rows={data}
+        rows={scans}
         columns={columns}
         initialState={{
           pagination: {
