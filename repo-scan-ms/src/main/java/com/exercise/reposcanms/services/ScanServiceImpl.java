@@ -46,7 +46,7 @@ public class ScanServiceImpl implements ScanService {
     }
 
     @Override
-    public Scan initiateScan(ScanRequestDTO scanRequestDTO) throws NoPermissionException {
+    public ScanDetailDTO initiateScan(ScanRequestDTO scanRequestDTO) throws NoPermissionException {
 
         Branch branch = branchRepo
                 .findById(scanRequestDTO.getBranchId())
@@ -63,8 +63,9 @@ public class ScanServiceImpl implements ScanService {
 
         delegateScanService.mockRunScan(newScan);
 
-        return scanRepo.save(newScan);
+        return new ScanDetailDTO(scanRepo.save(newScan));
     }
+
 
 
 }

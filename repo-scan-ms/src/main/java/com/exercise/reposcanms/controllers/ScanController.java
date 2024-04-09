@@ -35,8 +35,8 @@ public class ScanController {
     }
 
     @PostMapping
-    public Long runScan(@RequestBody ScanRequestDTO scanRequest) throws NoPermissionException {//@Valid
-        return scanService.initiateScan(scanRequest).getId();
+    public ScanDetailDTO runScan(@RequestBody ScanRequestDTO scanRequest) throws NoPermissionException {//@Valid
+        return scanService.initiateScan(scanRequest);
     }
     
     

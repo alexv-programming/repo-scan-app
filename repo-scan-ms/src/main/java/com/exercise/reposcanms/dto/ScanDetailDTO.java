@@ -1,5 +1,9 @@
 package com.exercise.reposcanms.dto;
 
+import com.exercise.reposcanms.model.Branch;
+import com.exercise.reposcanms.model.Repo;
+import com.exercise.reposcanms.model.Scan;
+import com.exercise.reposcanms.model.Workspace;
 import com.exercise.reposcanms.model.enums.ScanStatus;
 import com.exercise.reposcanms.model.enums.ScanType;
 import lombok.Data;
@@ -43,6 +47,25 @@ public class ScanDetailDTO implements Serializable {
         this.scanIssues = scanIssues;
         this.scanValid = scanValid;
         this.submissionTime = submissionTime;
+    }
+
+    public ScanDetailDTO(Scan scan) {
+        this.id = scan.getId();
+        this.scanType = scan.getType();
+        this.scanStatus = scan.getStatus();
+        this.scanIssues = scan.getIssues();
+        this.scanValid = scan.getValid();
+        this.submissionTime = scan.getSubmissionTime();
+        Branch branch = scan.getBranch();
+        this.branchId = branch.getId();
+        this.branchName = branch.getName();
+        Repo repo = branch.getRepo();
+        this.repoId = repo.getId();
+        this.repoName = repo.getName();
+        Workspace workspace = repo.getWorkspace();
+        this.workspaceId = workspace.getId();
+        this.workspaceName = workspace.getName();
+
     }
 
 }

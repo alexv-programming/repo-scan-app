@@ -2,6 +2,9 @@ package com.exercise.reposcanms.delegate;
 
 import com.exercise.reposcanms.model.Scan;
 import com.exercise.reposcanms.model.enums.ScanStatus;
+import com.exercise.reposcanms.repositories.ScanRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -9,6 +12,14 @@ import java.util.Random;
 @Service
 public class DelegateScanMockService {
 
+
+    ScanRepo scanRepo;
+    @Autowired
+    public DelegateScanMockService(ScanRepo scanRepo) {
+        this.scanRepo = scanRepo;
+    }
+
+    @Async
     public void mockRunScan(Scan scan) {
         Random random = new Random();
         int issues = random.nextInt(10);
@@ -30,5 +41,6 @@ public class DelegateScanMockService {
         scan.setStatus(ScanStatus.COMPLETED);
         scan.setIssues(issues);
         scan.setValid(issues == 0);
+        scanRepo.save(scan);
     }
 }
