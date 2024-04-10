@@ -11,8 +11,7 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim
 # Set the working directory in the container
 WORKDIR /app
-RUN ls -l /app/target/
 # Copy the built JAR file from the previous stage to the container
-COPY - from=build /app/target/repo-scan-ms.jar .
+COPY --from=build /app/target/repo-scan-ms-0.0.1-SNAPSHOT.jar .
 # Set the command to run the application
-CMD ["java", "-jar", "repo-scan-ms.jar"]
+CMD ["java", "-jar", "repo-scan-ms-0.0.1-SNAPSHOT.jar"]
