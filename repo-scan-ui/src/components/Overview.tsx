@@ -1,6 +1,4 @@
-import React from 'react'
-
-import { OverviewData } from '../types'
+import { OverviewData } from "../types";
 
 const Overview = ({ data }: { data: OverviewData[] }) => {
   return (
@@ -9,15 +7,15 @@ const Overview = ({ data }: { data: OverviewData[] }) => {
         return (
           <div key={item.scanType}>
             {item.scanType +
-              ' ' +
+              " " +
               item.scansCount +
-              ' issues found: ' +
+              " issues found: " +
               item.issues}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Overview
+export default Overview;
