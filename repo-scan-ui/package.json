@@ -21,7 +21,7 @@
     "react-hook-form": "^7.51.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
+    "@types/react": "*",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
